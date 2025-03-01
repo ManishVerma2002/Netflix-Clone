@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./TitileCards.css";
 import { Link } from "react-router-dom";
 
-const TitileCards = ({ title, category }) => {
+const TitleCards = ({ title, category }) => {
   const [apiData, setApiData] = useState([]); // Initialize as an empty array
   const cardsRef = useRef();
 
@@ -26,7 +26,7 @@ const TitileCards = ({ title, category }) => {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/movie/${category || "now_playing"}?language=en-US&page=1`,
+          `https://api.themoviedb.org/3/movie/${category ?? "now_playing"}?language=en-US&page=1`,
           options
         );
         const data = await res.json();
@@ -55,11 +55,13 @@ const TitileCards = ({ title, category }) => {
       <h1>{title || "Popular on Netflix"}</h1>
       <div className="card-list" ref={cardsRef}>
         {apiData.length > 0 ? (
-          apiData.map((card, index) => (
-            <Link to={`/player/card.id${card.id}`} className="card" key={index}>
+          apiData.map((card) => (
+            <Link to={`/player/${card.id}`} className="card" key={card.id}>
               <img
-                src={`https://image.tmdb.org/t/p/w500${card.backdrop_path}`}
-                alt={card.title}
+                src={card.backdrop_path
+                  ? `https://image.tmdb.org/t/p/w500${card.backdrop_path}`
+                  : "fallback_image_url"}
+                alt={card.title || "No title available"}
               />
               <p>{card.original_title}</p>
             </Link>
@@ -72,4 +74,4 @@ const TitileCards = ({ title, category }) => {
   );
 };
 
-export default TitileCards;
+export default TitleCards;
