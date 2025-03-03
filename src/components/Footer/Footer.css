@@ -2,6 +2,7 @@
     padding: 30px, 4%;
     max-width: 1000px;
     margin: 0 auto;
+    margin-left:6%;
 }
 
 .footer-icons{
@@ -25,4 +26,15 @@
 .copyright-text{
     color: gray;
     font-size: 14px;
+}
+
+@media (max-width:800px){
+    .footer-icons img{
+        width: 25px;
+    }
+    .footer ul{
+        grid-template-columns: auto auto;
+        gap:8px;
+        font-size: 14px;
+    }
 }

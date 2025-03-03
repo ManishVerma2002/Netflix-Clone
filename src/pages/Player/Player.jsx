@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './Player.css';
 import back_arrow_icon from '../../assets/back_arrow_icon.png'; 
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 
 const Player = () => {
   const { id } = useParams(); // Get the movie ID from URL
   const [apiData, setApiData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const options = {
     method: 'GET',
@@ -37,7 +38,7 @@ const Player = () => {
 
   return (
     <div className='player'>
-      <img src={back_arrow_icon} alt='Back' />
+      <img src={back_arrow_icon} alt='Back' onClick={()=>navigate(-1)} />
 
       {loading ? (
         <p>Loading...</p>

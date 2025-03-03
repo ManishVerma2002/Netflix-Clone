@@ -30,7 +30,7 @@ const TitleCards = ({ title, category }) => {
           options
         );
         const data = await res.json();
-        setApiData(data.results || []); // Ensure results exist
+        setApiData(data.results || []); 
       } catch (err) {
         console.error("Error fetching data:", err);
       }
